@@ -5,7 +5,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.utils import shuffle
 
 np.random.seed(0)
-tf.set_random_seed(123)
+tf.set_random_seed(1234)
 
 
 def inference(x, n_batch, maxlen=None, n_hidden=None, n_out=None):
@@ -111,12 +111,12 @@ if __name__ == '__main__':
     モデル設定
     '''
     n_in = len(X[0][0])  # 1
-    n_hidden = 20
+    n_hidden = 30
     n_out = len(Y[0])  # 1
 
     x = tf.placeholder(tf.float32, shape=[None, maxlen, n_in])
     t = tf.placeholder(tf.float32, shape=[None, n_out])
-    n_batch = tf.placeholder(tf.int32)
+    n_batch = tf.placeholder(tf.int32, shape=[])
 
     y = inference(x, n_batch, maxlen=maxlen, n_hidden=n_hidden, n_out=n_out)
     loss = loss(y, t)
