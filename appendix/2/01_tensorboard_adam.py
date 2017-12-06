@@ -58,7 +58,7 @@ def loss(y, t):
         cross_entropy = \
             tf.reduce_mean(-tf.reduce_sum(
                            t * tf.log(tf.clip_by_value(y, 1e-10, 1.0)),
-                           reduction_indices=[1]))
+                           axis=1))
     tf.summary.scalar('cross_entropy', cross_entropy)
     return cross_entropy
 

@@ -61,8 +61,7 @@ class DNN(object):
         return y
 
     def loss(self, y, t):
-        cross_entropy = tf.reduce_mean(-tf.reduce_sum(t * tf.log(y),
-                                       reduction_indices=[1]))
+        cross_entropy = tf.reduce_mean(-tf.reduce_sum(t * tf.log(y), axis=1))
         return cross_entropy
 
     def training(self, loss):

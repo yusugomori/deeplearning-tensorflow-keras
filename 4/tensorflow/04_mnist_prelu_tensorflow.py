@@ -67,8 +67,7 @@ W4 = tf.Variable(tf.truncated_normal([n_hidden, n_out], stddev=0.01))
 b4 = tf.Variable(tf.zeros([n_out]))
 y = tf.nn.softmax(tf.matmul(h3, W4) + b4)
 
-cross_entropy = tf.reduce_mean(-tf.reduce_sum(t * tf.log(y),
-                               reduction_indices=[1]))
+cross_entropy = tf.reduce_mean(-tf.reduce_sum(t * tf.log(y), axis=1))
 train_step = tf.train.GradientDescentOptimizer(0.01).minimize(cross_entropy)
 
 correct_prediction = tf.equal(tf.argmax(y, 1), tf.argmax(t, 1))
