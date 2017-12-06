@@ -111,12 +111,12 @@ if __name__ == '__main__':
     モデル設定
     '''
     n_in = len(X[0][0])  # 1
-    n_hidden = 20
+    n_hidden = 30
     n_out = len(Y[0])  # 1
 
     x = tf.placeholder(tf.float32, shape=[None, maxlen, n_in])
     t = tf.placeholder(tf.float32, shape=[None, n_out])
-    n_batch = tf.placeholder(tf.int32)
+    n_batch = tf.placeholder(tf.int32, shape=[])
 
     y = inference(x, n_batch, maxlen=maxlen, n_hidden=n_hidden, n_out=n_out)
     loss = loss(y, t)

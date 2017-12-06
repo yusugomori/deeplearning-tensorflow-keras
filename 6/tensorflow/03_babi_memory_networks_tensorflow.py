@@ -176,7 +176,7 @@ if __name__ == '__main__':
     x = tf.placeholder(tf.int32, shape=[None, story_maxlen])
     q = tf.placeholder(tf.int32, shape=[None, question_maxlen])
     a = tf.placeholder(tf.float32, shape=[None, vocab_size])
-    n_batch = tf.placeholder(tf.int32)
+    n_batch = tf.placeholder(tf.int32, shape=[])
 
     y = inference(x, q, n_batch,
                   vocab_size=vocab_size,

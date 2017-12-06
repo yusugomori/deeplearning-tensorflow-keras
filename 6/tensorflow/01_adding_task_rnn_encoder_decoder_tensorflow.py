@@ -165,7 +165,7 @@ if __name__ == '__main__':
 
     x = tf.placeholder(tf.float32, shape=[None, input_digits, n_in])
     t = tf.placeholder(tf.float32, shape=[None, output_digits, n_out])
-    n_batch = tf.placeholder(tf.int32)
+    n_batch = tf.placeholder(tf.int32, shape=[])
     is_training = tf.placeholder(tf.bool)
 
     y = inference(x, t, n_batch, is_training,
