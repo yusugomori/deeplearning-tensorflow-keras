@@ -10,4 +10,4 @@
 
 [r1.2](https://github.com/yusugomori/deeplearning-tensorflow-keras/tree/r1.2) (r1.2, r1.3)
 
-[r1.4](https://github.com/yusugomori/deeplearning-tensorflow-keras/tree/r1.4) (r1.4)
+[r1.4](https://github.com/yusugomori/deeplearning-tensorflow-keras/tree/r1.4) (r1.4, r1.5)
