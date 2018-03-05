@@ -18,6 +18,7 @@ class DNN(object):
         self.biases = []
 
         self._x = None
+        self._y = None
         self._t = None,
         self._keep_prob = None
         self._sess = None
@@ -94,6 +95,7 @@ class DNN(object):
         sess = tf.Session()
         sess.run(init)
 
+        self._y = y
         self._sess = sess
 
         N_train = len(X_train)
@@ -132,7 +134,8 @@ class DNN(object):
         return self._history
 
     def evaluate(self, X_test, Y_test):
-        return self.accuracy.eval(session=self._sess, feed_dict={
+        accuracy = self.accuracy(self._y, self._t)
+        return accuracy.eval(session=self._sess, feed_dict={
             self._x: X_test,
             self._t: Y_test,
             self._keep_prob: 1.0
@@ -166,7 +169,7 @@ if __name__ == '__main__':
     モデル学習
     '''
     model.fit(X_train, Y_train,
-              nb_epoch=50,
+              nb_epoch=30,
               batch_size=200,
               p_keep=0.5)
 
