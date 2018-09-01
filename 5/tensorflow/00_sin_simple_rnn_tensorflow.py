@@ -17,7 +17,7 @@ def inference(x, n_batch, maxlen=None, n_hidden=None, n_out=None):
         initial = tf.zeros(shape, dtype=tf.float32)
         return tf.Variable(initial)
 
-    cell = tf.contrib.rnn.BasicRNNCell(n_hidden)
+    cell = tf.nn.rnn_cell.BasicRNNCell(n_hidden)
     initial_state = cell.zero_state(n_batch, tf.float32)
 
     state = initial_state
