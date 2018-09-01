@@ -1,6 +1,7 @@
 import numpy as np
 import tensorflow as tf
 from tensorflow.contrib import rnn
+from tensorflow.nn import rnn_cell
 from sklearn.model_selection import train_test_split
 from sklearn.utils import shuffle
 
@@ -22,7 +23,7 @@ def inference(x, y, n_batch, is_training,
         return tf.Variable(initial)
 
     # Encode
-    encoder = rnn.BasicLSTMCell(n_hidden, forget_bias=1.0)
+    encoder = rnn_cell.BasicLSTMCell(n_hidden, forget_bias=1.0)
     encoder = rnn.AttentionCellWrapper(encoder,
                                        input_digits,
                                        state_is_tuple=True)
@@ -39,7 +40,7 @@ def inference(x, y, n_batch, is_training,
             encoder_states.append(state)
 
     # Decode
-    decoder = rnn.BasicLSTMCell(n_hidden, forget_bias=1.0)
+    decoder = rnn_cell.BasicLSTMCell(n_hidden, forget_bias=1.0)
     decoder = rnn.AttentionCellWrapper(decoder,
                                        input_digits,
                                        state_is_tuple=True)

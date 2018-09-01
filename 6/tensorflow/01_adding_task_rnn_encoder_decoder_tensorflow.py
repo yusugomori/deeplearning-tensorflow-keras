@@ -1,6 +1,6 @@
 import numpy as np
 import tensorflow as tf
-from tensorflow.contrib import rnn
+from tensorflow.nn import rnn_cell
 from sklearn.model_selection import train_test_split
 from sklearn.utils import shuffle
 
@@ -20,7 +20,7 @@ def inference(x, y, n_batch, is_training,
         return tf.Variable(initial)
 
     # Encoder
-    encoder = rnn.BasicLSTMCell(n_hidden, forget_bias=1.0)
+    encoder = rnn_cell.BasicLSTMCell(n_hidden, forget_bias=1.0)
     state = encoder.zero_state(n_batch, tf.float32)
     encoder_outputs = []
     encoder_states = []
@@ -34,7 +34,7 @@ def inference(x, y, n_batch, is_training,
             encoder_states.append(state)
 
     # Decoder
-    decoder = rnn.BasicLSTMCell(n_hidden, forget_bias=1.0)
+    decoder = rnn_cell.BasicLSTMCell(n_hidden, forget_bias=1.0)
     state = encoder_states[-1]
     decoder_outputs = [encoder_outputs[-1]]
 

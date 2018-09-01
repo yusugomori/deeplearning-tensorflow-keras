@@ -34,7 +34,7 @@ def inference(x, q, n_batch,
     o = tf.transpose(o, perm=[0, 2, 1])
     ou = tf.concat([o, u], axis=-1)
 
-    cell = tf.contrib.rnn.BasicLSTMCell(embedding_dim//2, forget_bias=1.0)
+    cell = tf.nn.rnn_cell.BasicLSTMCell(embedding_dim//2, forget_bias=1.0)
     initial_state = cell.zero_state(n_batch, tf.float32)
     state = initial_state
     outputs = []

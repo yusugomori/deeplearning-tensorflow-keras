@@ -1,7 +1,7 @@
 import numpy as np
 import tensorflow as tf
 import matplotlib.pyplot as plt
-from tensorflow.contrib import rnn
+from tensorflow.nn import rnn_cell
 from sklearn import datasets
 from sklearn.model_selection import train_test_split
 from sklearn.utils import shuffle
@@ -25,15 +25,16 @@ def inference(x, n_in=None, n_time=None, n_hidden=None, n_out=None):
     x = tf.reshape(x, [-1, n_in])
     x = tf.split(x, n_time, 0)
 
-    cell_forward = rnn.BasicLSTMCell(n_hidden, forget_bias=1.0)
-    cell_backward = rnn.BasicLSTMCell(n_hidden, forget_bias=1.0)
+    cell_forward = rnn_cell.BasicLSTMCell(n_hidden, forget_bias=1.0)
+    cell_backward = rnn_cell.BasicLSTMCell(n_hidden, forget_bias=1.0)
 
     outputs, _, _ = \
-        rnn.static_bidirectional_rnn(cell_forward, cell_backward, x,
-                                     dtype=tf.float32)
+        tf.nn.static_bidirectional_rnn(cell_forward, cell_backward, x,
+                                       dtype=tf.float32)
 
     W = weight_variable([n_hidden * 2, n_out])
     b = bias_variable([n_out])
+
     y = tf.nn.softmax(tf.matmul(outputs[-1], W) + b)
 
     return y
